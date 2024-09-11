@@ -1,16 +1,9 @@
 <template>
-<div>2223</div>
-<h1>22333</h1>
-<Router-View>
-  233
-</Router-View>
-  <!-- <div>
-    <HeaderComponent />
 
-    <ContentComponent />
+<HeaderComponent />
 
-    <FooterComponent />
-  </div> -->
+  <ContentComponent />
+  <FooterComponent />
 </template>
 
 <script setup>
