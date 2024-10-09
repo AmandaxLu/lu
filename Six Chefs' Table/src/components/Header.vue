@@ -201,45 +201,45 @@ const handleLogoutClick = () => {
 </script>
 
 <script>
-import { mapState } from "vuex";
-import Login from "./Login.vue";
-export default {
-  components: {
-    Login,
-  },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapState({
-      IsLogIn: (state) => state.IsLogIn, // 映射 Vuex 中的 IsLogIn
-      WhereToGo: (state) => state.WhereToGo, // 映射 Vuex 中的 WhereToGo
-    }),
-  },
-  methods: {
-    navigateTo(path) {
-      this.$router.push(path); // 路由跳转方法
-    },
-    GoCstmData() {
+// import { mapState } from "vuex";
+// import Login from "./Login.vue";
+// export default {
+//   components: {
+//     Login,
+//   },
+//   data() {
+//     return {};
+//   },
+//   computed: {
+//     ...mapState({
+//       IsLogIn: (state) => state.IsLogIn, // 映射 Vuex 中的 IsLogIn
+//       WhereToGo: (state) => state.WhereToGo, // 映射 Vuex 中的 WhereToGo
+//     }),
+//   },
+//   methods: {
+//     navigateTo(path) {
+//       this.$router.push(path); // 路由跳转方法
+//     },
+//     GoCstmData() {
 
-      localStorage.setItem("WhereToGo", "/CstmData"); // 将路径存储到 sessionStorage
-      try {
-        if (this.IsLogIn) {
-          this.navigateTo("/CstmData");
-        } else {
-          alert("請先登入");
-          this.navigateTo("/G_LogIn");
-        }
-      } catch (error) {
-        console.error("Error in checkLogin:", error);
-      }
-    },
-    GoLogIn() {
-      localStorage.setItem("WhereToGo", "/"); // 将路径存储到 sessionStorage
-      this.navigateTo("/G_LogIn");
-    },
-  },
-};
+//       localStorage.setItem("WhereToGo", "/CstmData"); // 将路径存储到 sessionStorage
+//       try {
+//         if (this.IsLogIn) {
+//           this.navigateTo("/CstmData");
+//         } else {
+//           alert("請先登入");
+//           this.navigateTo("/G_LogIn");
+//         }
+//       } catch (error) {
+//         console.error("Error in checkLogin:", error);
+//       }
+//     },
+//     GoLogIn() {
+//       localStorage.setItem("WhereToGo", "/"); // 将路径存储到 sessionStorage
+//       this.navigateTo("/G_LogIn");
+//     },
+//   },
+// };
 </script>
 
 <style scoped>
