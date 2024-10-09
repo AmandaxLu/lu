@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\lu\\webapps\\webapps.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Desktop\\XXX\\lu\\webapps\\webapps.csproj",
       "projectName": "webapps",
-      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\lu\\webapps\\webapps.csproj",
+      "projectPath": "C:\\Users\\User\\Desktop\\XXX\\lu\\webapps\\webapps.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\lu\\webapps\\obj\\",
+      "outputPath": "C:\\Users\\User\\Desktop\\XXX\\lu\\webapps\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -532,7 +532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
