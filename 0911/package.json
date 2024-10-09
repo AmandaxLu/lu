@@ -1,0 +1,31 @@
+{
+  "name": "0910",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "core-js": "^3.8.3",
+    "jquery": "^3.7.1",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ],
+  "packageManager": "yarn@4.4.1+sha512.f825273d0689cc9ead3259c14998037662f1dcd06912637b21a450e8da7cfeb4b1965bbee73d16927baa1201054126bc385c6f43ff4aa705c8631d26e12460f1"
+}

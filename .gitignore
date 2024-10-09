@@ -4,3 +4,5 @@
 /webapps/obj
 
 /0911/node_modules
+bin/
+obj/
