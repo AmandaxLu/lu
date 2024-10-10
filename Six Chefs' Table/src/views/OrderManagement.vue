@@ -8,7 +8,7 @@
           <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
           <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
           <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
-          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickDate" label="取餐時間" min-width="15%"></el-table-column>
           <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
           <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
           <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
@@ -45,7 +45,7 @@
           <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
           <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
           <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
-          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickDate" label="取餐時間" min-width="15%"></el-table-column>
           <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
           <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
           <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
@@ -63,7 +63,7 @@
               <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
               <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
               <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
-              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickDate }}</p>
               <p><strong>總金額：</strong>{{ order.total }}</p>
               <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
               <p><strong>狀態：</strong>{{ order.status }}</p>
@@ -79,7 +79,7 @@
           <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
           <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
           <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
-          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickDate" label="取餐時間" min-width="15%"></el-table-column>
           <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
           <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
           <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
@@ -97,7 +97,7 @@
               <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
               <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
               <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
-              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickDate }}</p>
               <p><strong>總金額：</strong>{{ order.total }}</p>
               <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
               <p><strong>狀態：</strong>{{ order.status }}</p>
@@ -113,7 +113,7 @@
           <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
           <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
           <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
-          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickDate" label="取餐時間" min-width="15%"></el-table-column>
           <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
           <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
           <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
@@ -131,7 +131,7 @@
               <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
               <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
               <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
-              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickDate }}</p>
               <p><strong>總金額：</strong>{{ order.total }}</p>
               <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
               <p><strong>狀態：</strong>{{ order.status }}</p>
@@ -147,7 +147,7 @@
           <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
           <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
           <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
-          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickDate" label="取餐時間" min-width="15%"></el-table-column>
           <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
           <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
           <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
@@ -165,7 +165,7 @@
               <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
               <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
               <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
-              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickDate }}</p>
               <p><strong>總金額：</strong>{{ order.total }}</p>
               <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
               <p><strong>狀態：</strong>{{ order.status }}</p>

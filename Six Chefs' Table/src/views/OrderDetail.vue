@@ -3,7 +3,7 @@
     <el-tabs v-model="activeTab">
       <el-row style="padding: 20px;">
         <el-col :span="8">
-          <h6>狀態：</h6>
+          <h6>狀態：{{  }}</h6>
         </el-col>
         <el-col :span="14" style="text-align: right;">
           <template #default="scope">
