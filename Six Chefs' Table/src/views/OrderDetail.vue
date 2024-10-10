@@ -1,66 +1,62 @@
 <template>
   <div class="order-detail-management">
     <el-tabs v-model="activeTab">
-      <el-tab-pane label="待確認" name="pending">
-        <!-- 桌面版顯示表格 -->
-        <el-table v-if="isDesktop" :data="paginatedOrderDetails" style="width: 100%"
-          @selection-change="handleSelectionChange">
-          <el-table-column prop="image" label="商品圖片" width="150">
-            <template #default="scope">
-              <img :src="scope.row.image" alt="商品圖片" style="width: 100px; height: auto;" />
-            </template>
-          </el-table-column>
-          <el-table-column prop="productName" label="商品名稱" width="100"></el-table-column>
-          <el-table-column prop="quantity" label="數量" width="100"></el-table-column>
-          <el-table-column prop="price" label="單價" width="120"></el-table-column>
-          <el-table-column prop="total" label="總金額" width="120"></el-table-column>
-          <!-- 操作按鈕 -->
-          <el-table-column label="" width="180">
-            <template #default="scope">
-              <el-button type="info" @click="viewOrder(scope.row)">編輯</el-button>
-              <el-button type="danger" @click="editOrder(scope.row)">刪除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        
+      <el-row style="padding: 20px;">
+        <el-col :span="8">
+          <h6>狀態：</h6>
+        </el-col>
+        <el-col :span="14" style="text-align: right;">
+          <template #default="scope">
+            <el-button type="info" @click="viewOrder(scope.row)">完成訂單</el-button>
+            <el-button type="danger" @click="editOrder(scope.row)">取消訂單</el-button>
+          </template>
+</el-col>
+</el-row>
+      <!-- <div>
+        <h6>狀態：</h6>
+      </div>
+      <div style="text-align: right;">
+        <el-button type="info">完成訂單</el-button>
+        <el-button type="danger">取消訂單</el-button>
+      </div> -->
 
-        <!-- 手機版顯示卡片式佈局 -->
-        <div v-else class="mobile-order-detail-cards">
+      <!-- 桌面版顯示表格 -->
+      <el-table v-if="isDesktop" :data="paginatedOrderDetails" style="width: 90%"
+        @selection-change="handleSelectionChange">
+        <el-table-column prop="image" label="商品圖片" min-width="25%">
+          <template #default="scope">
+            <img :src="scope.row.image" alt="商品圖片" style="width: 100px; height: auto;" />
+          </template>
+        </el-table-column>
+        <el-table-column prop="productName" label="商品名稱" min-width="25%"></el-table-column>
+        <el-table-column prop="quantity" label="數量" min-width="15%"></el-table-column>
+        <el-table-column prop="price" label="單價" min-width="15%"></el-table-column>
+        <el-table-column prop="total" label="總金額" min-width="20%"></el-table-column>
+      </el-table>
 
-          <div v-for="detail in paginatedOrderDetails" :key="detail.id" class="order-detail-card">
 
-            <div class="order-detail-image">
-              <img :src="detail.image" alt="商品圖片" />
-            </div>
-            <div class="order-detail-info">
-              <p><strong>數量：</strong>{{ detail.quantity }}</p>
-              <p><strong>單價：</strong>{{ detail.price }}</p>
-              <p><strong>總金額：</strong>{{ detail.total }}</p>
-            </div>
-            <div class="order-detail-actions">
-              <el-button type="info" size="mini" @click="editDetail(detail)">編輯</el-button>
-              <el-button type="danger" size="mini" @click="deleteDetail(detail)">刪除</el-button>
-            </div>
+      <!-- 手機版顯示卡片式佈局 -->
+      <div v-else class="mobile-order-detail-cards">
+
+        <div v-for="detail in paginatedOrderDetails" :key="detail.id" class="order-detail-card">
+          <div class="order-detail-image">
+            <img :src="detail.image" alt="商品圖片" />
+          </div>
+          <div class="order-detail-info">
+            <p><strong>數量：</strong>{{ detail.quantity }}</p>
+            <p><strong>單價：</strong>{{ detail.price }}</p>
+            <p><strong>總金額：</strong>{{ detail.total }}</p>
           </div>
         </div>
-      </el-tab-pane>
-      
-      <el-tab-pane label="已確認" name="confirmed">
-        <h3>已確認訂單</h3>
-        <el-table :data="confirmedOrders" style="width: 100%">
-          <el-table-column prop="orderNumber" label="訂單編號" width="120"></el-table-column>
-          <el-table-column prop="date" label="日期" width="180"></el-table-column>
-          <el-table-column prop="items" label="餐點" :formatter="formatItems"></el-table-column>
-          <el-table-column prop="total" label="總金額" width="120"></el-table-column>
-          <el-table-column prop="status" label="狀態" width="100"></el-table-column>
-        </el-table>
-      </el-tab-pane>
+      </div>
+      <!-- </el-tab-pane> -->
+
     </el-tabs>
     <div class="pagination-container">
       <el-pagination :page-size="pageSize" :pager-count="pagerCount" layout="prev, pager, next"
         :total="orderDetails.length" @current-change="handlePageChange" />
     </div>
-    
+
   </div>
 </template>
 
@@ -144,13 +140,6 @@ watch(currentPage, () => {
   isAllSelected.value = false
   selectedItems.value = []
 })
-
-// 新增已確認訂單的模擬數據
-const confirmedOrders = ref([
-  { orderNumber: 'A001', date: '2023-05-01', items: '商品A x2, 商品B x1', total: 500, status: '已完成' },
-  { orderNumber: 'A002', date: '2023-05-02', items: '商品C x3, 商品D x2', total: 800, status: '已完成' },
-  { orderNumber: 'A003', date: '2023-05-03', items: '商品E x1, 商品F x4', total: 600, status: '已完成' },
-])
 
 // 格式化餐點項目
 const formatItems = (row) => {

@@ -3,32 +3,21 @@
     <h2>訂單管理</h2>
     <el-tabs v-model="activeTab">
       <el-tab-pane label="點餐記錄" name="orders">
-        <!-- <h3>點餐記錄</h3> -->
         <!-- 桌面版顯示表格 -->
-        <div v-if="isDesktop">
-          <el-row>
-            <el-col :span="4">商家訂單號</el-col>
-            <el-col :span="3">客戶編號</el-col>
-            <el-col :span="4">訂單日期</el-col>
-            <el-col :span="4">取貨日期</el-col>
-            <el-col :span="2">總金額</el-col>
-            <el-col :span="2">付款方式</el-col>
-            <el-col :span="2">狀態</el-col>
-            <el-col :span="3">操作</el-col>
-          </el-row>
-          <el-row v-for="(order, index) in paginatedOrders" :key="index">
-            <el-col :span="4">{{ order.merchantTradeNo }}</el-col>
-            <el-col :span="3">{{ order.cstmNum }}</el-col>
-            <el-col :span="4">{{ order.orderDate }}</el-col>
-            <el-col :span="4">{{ order.pickDate }}</el-col>
-            <el-col :span="2">{{ order.total }}</el-col>
-            <el-col :span="2">{{ order.payMethod }}</el-col>
-            <el-col :span="2">{{ order.status }}</el-col>
-            <el-col :span="3">
-              <el-button type="info" @click="viewOrder(order)">查看</el-button>
-            </el-col>
-          </el-row>
-        </div>
+        <el-table v-if="isDesktop" :data="paginatedOrders">
+          <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
+          <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
+          <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
+          <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
+          <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
+          <el-table-column label="" min-width="12.5%">
+            <template #default="scope">
+              <el-button type="info" @click="viewOrder(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
 
         <!-- 手機版顯示卡片式佈局 -->
         <div v-else class="mobile-order-cards">
@@ -44,6 +33,142 @@
             </div>
             <div class="order-actions">
               <el-button type="info" size="mini" @click="viewOrder(order)">查看</el-button>
+            </div>
+          </div>
+        </div>
+      </el-tab-pane>
+
+      <!-- 已付款頁籤 -->
+      <el-tab-pane label="已付款" name="confirmed">
+        <!-- 桌面版顯示表格 -->
+        <el-table v-if="isDesktop" :data="paginatedOrders">
+          <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
+          <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
+          <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
+          <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
+          <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
+          <el-table-column label="" min-width="12.5%">
+            <template #default="scope">
+              <el-button type="info" @click="viewOrder(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <!-- 手機版顯示卡片式佈局 -->
+        <div v-else class="mobile-order-cards">
+          <div v-for="order in paginatedOrders" :key="order.merchantTradeNo" class="order-card">
+            <div class="order-info">
+              <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
+              <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
+              <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>總金額：</strong>{{ order.total }}</p>
+              <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
+              <p><strong>狀態：</strong>{{ order.status }}</p>
+            </div>
+          </div>
+        </div>
+      </el-tab-pane>
+
+      <!-- 未取餐頁籤 -->
+      <el-tab-pane label="未取餐" name="uncollected">
+        <!-- 桌面版顯示表格 -->
+        <el-table v-if="isDesktop" :data="paginatedOrders">
+          <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
+          <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
+          <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
+          <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
+          <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
+          <el-table-column label="" min-width="12.5%">
+            <template #default="scope">
+              <el-button type="info" @click="viewOrder(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <!-- 手機版顯示卡片式佈局 -->
+        <div v-else class="mobile-order-cards">
+          <div v-for="order in paginatedOrders" :key="order.merchantTradeNo" class="order-card">
+            <div class="order-info">
+              <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
+              <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
+              <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>總金額：</strong>{{ order.total }}</p>
+              <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
+              <p><strong>狀態：</strong>{{ order.status }}</p>
+            </div>
+          </div>
+        </div>
+      </el-tab-pane>
+
+      <!-- 完成訂單頁籤 -->
+      <el-tab-pane label="完成訂單" name="completed">
+        <!-- 桌面版顯示表格 -->
+        <el-table v-if="isDesktop" :data="paginatedOrders">
+          <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
+          <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
+          <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
+          <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
+          <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
+          <el-table-column label="" min-width="12.5%">
+            <template #default="scope">
+              <el-button type="info" @click="viewOrder(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <!-- 手機版顯示卡片式佈局 -->
+        <div v-else class="mobile-order-cards">
+          <div v-for="order in paginatedOrders" :key="order.merchantTradeNo" class="order-card">
+            <div class="order-info">
+              <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
+              <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
+              <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>總金額：</strong>{{ order.total }}</p>
+              <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
+              <p><strong>狀態：</strong>{{ order.status }}</p>
+            </div>
+          </div>
+        </div>
+      </el-tab-pane>
+
+      <!-- 取消訂單頁籤 -->
+      <el-tab-pane label="取消訂單" name="canceled">
+        <!-- 桌面版顯示表格 -->
+        <el-table v-if="isDesktop" :data="paginatedOrders">
+          <el-table-column prop="merchantTradeNo" label="訂單編號" min-width="10%"></el-table-column>
+          <el-table-column prop="cstmNum" label="會員編號" min-width="10%"></el-table-column>
+          <el-table-column prop="orderDate" label="訂購時間" min-width="15%"></el-table-column>
+          <el-table-column prop="pickupTime" label="取餐時間" min-width="15%"></el-table-column>
+          <el-table-column prop="total" label="總金額" min-width="12.5%"></el-table-column>
+          <el-table-column prop="payMethod" label="付款方式" min-width="12.5%"></el-table-column>
+          <el-table-column prop="status" label="狀態" min-width="12.5%"></el-table-column>
+          <el-table-column label="" min-width="12.5%">
+            <template #default="scope">
+              <el-button type="info" @click="viewOrder(scope.row)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        
+        <!-- 手機版顯示卡片式佈局 -->
+        <div v-else class="mobile-order-cards">
+          <div v-for="order in paginatedOrders" :key="order.merchantTradeNo" class="order-card">
+            <div class="order-info">
+              <p><strong>訂單編號：</strong>{{ order.merchantTradeNo }}</p>
+              <p><strong>會員編號：</strong>{{ order.cstmNum }}</p>
+              <p><strong>訂購時間：</strong>{{ order.orderDate }}</p>
+              <p><strong>取餐時間：</strong>{{ order.pickupTime }}</p>
+              <p><strong>總金額：</strong>{{ order.total }}</p>
+              <p><strong>付款方式：</strong>{{ order.payMethod }}</p>
+              <p><strong>狀態：</strong>{{ order.status }}</p>
             </div>
           </div>
         </div>
@@ -71,7 +196,7 @@ const userStore = useUserStore()
 const router = useRouter()
 const activeTab = ref('orders')
 
-// 模擬的點餐數據
+// 修改模擬數據
 const orders = ref([
   { merchantTradeNo: '001', cstmNum: 'A001', orderDate: '2023-05-20', pickDate: '2023-05-20', total: '800', payMethod: '現金', status: '已確認' },
   { merchantTradeNo: '002', cstmNum: 'A005', orderDate: '2023-05-21', pickDate: '2023-05-21', total: '300', payMethod: '信用卡', status: '待確認' },
@@ -102,17 +227,35 @@ const orders = ref([
 ]);
 
 
+// 根據狀態篩選訂單
+const filteredOrders = computed(() => {
+  switch (activeTab.value) {
+    case 'orders':
+      return orders.value
+    case 'confirmed':
+      return orders.value.filter(order => order.status === '已付款')
+    case 'uncollected':
+      return orders.value.filter(order => order.status === '未取餐')
+    case 'completed':
+      return orders.value.filter(order => order.status === '已完成')
+    case 'canceled':
+      return orders.value.filter(order => order.status === '已取消')
+    default:
+      return []
+  }
+})
+
+// 修改計算分頁訂單的邏輯
+const paginatedOrders = computed(() => {
+  const start = (currentPage.value - 1) * pageSize
+  const end = currentPage.value * pageSize
+  return filteredOrders.value.slice(start, end)
+})
+
 // 分頁變數
 const currentPage = ref(1)
 const pageSize = 5
 const pagerCount = 10
-
-// 計算目前頁面顯示的訂單
-const paginatedOrders = computed(() => {
-  const start = (currentPage.value - 1) * pageSize
-  const end = currentPage.value * pageSize
-  return orders.value.slice(start, end)
-})
 
 // 檢測是否是桌面版還是手機版
 const isDesktop = ref(true)
@@ -151,6 +294,7 @@ const editOrder = (row) => {
   console.log("修改", row)
   // 這裡可以添加修改訂單的邏輯
 }
+
 </script>
 
 <style scoped>
@@ -165,10 +309,8 @@ const editOrder = (row) => {
 
 .el-table {
   width: 100%;
-  max-height: 60vh;
-  /* 設置最大高度來避免整個頁面出現滾動 */
-  overflow-y: auto;
-  /* 當表格內容超出時，僅表格內部出現滾動條 */
+  /*max-height: 60vh;  設置最大高度來避免整個頁面出現滾動 */
+  /*overflow-y: auto;  當表格內容超出時，僅表格內部出現滾動條 */
 }
 
 
