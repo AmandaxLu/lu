@@ -157,7 +157,7 @@
             </template>
           </el-table-column>
         </el-table>
-        
+
         <!-- 手機版顯示卡片式佈局 -->
         <div v-else class="mobile-order-cards">
           <div v-for="order in paginatedOrders" :key="order.merchantTradeNo" class="order-card">
@@ -192,39 +192,40 @@ import { useUserStore } from '../stores/user'
 import { useRouter } from 'vue-router'
 import OrderDetail from './OrderDetail.vue'  // 導入OrderDetail組件
 
-const userStore = useUserStore()
+const orderStore = useUserStore()
 const router = useRouter()
 const activeTab = ref('orders')
 
-// 修改模擬數據
-const orders = ref([
-  { merchantTradeNo: '001', cstmNum: 'A001', orderDate: '2023-05-20', pickDate: '2023-05-20', total: '800', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '002', cstmNum: 'A005', orderDate: '2023-05-21', pickDate: '2023-05-21', total: '300', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '003', cstmNum: 'A010', orderDate: '2023-05-22', pickDate: '2023-05-22', total: '450', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '004', cstmNum: 'A003', orderDate: '2023-05-23', pickDate: '2023-05-23', total: '600', payMethod: '信用卡', status: '已確認' },
-  { merchantTradeNo: '005', cstmNum: 'A007', orderDate: '2023-05-24', pickDate: '2023-05-24', total: '700', payMethod: '現金', status: '待確認' },
-  { merchantTradeNo: '006', cstmNum: 'A002', orderDate: '2023-05-25', pickDate: '2023-05-25', total: '900', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '007', cstmNum: 'A008', orderDate: '2023-05-26', pickDate: '2023-05-26', total: '350', payMethod: '信用卡', status: '已確認' },
-  { merchantTradeNo: '008', cstmNum: 'A004', orderDate: '2023-05-27', pickDate: '2023-05-27', total: '400', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '009', cstmNum: 'A009', orderDate: '2023-05-28', pickDate: '2023-05-28', total: '200', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '010', cstmNum: 'A011', orderDate: '2023-05-29', pickDate: '2023-05-29', total: '1000', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '011', cstmNum: 'A012', orderDate: '2023-05-30', pickDate: '2023-05-30', total: '500', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '012', cstmNum: 'A013', orderDate: '2023-05-31', pickDate: '2023-05-31', total: '300', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '013', cstmNum: 'A014', orderDate: '2023-06-01', pickDate: '2023-06-01', total: '450', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '014', cstmNum: 'A015', orderDate: '2023-06-02', pickDate: '2023-06-02', total: '600', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '015', cstmNum: 'A016', orderDate: '2023-06-03', pickDate: '2023-06-03', total: '750', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '016', cstmNum: 'A017', orderDate: '2023-06-04', pickDate: '2023-06-04', total: '900', payMethod: '現金', status: '待確認' },
-  { merchantTradeNo: '017', cstmNum: 'A018', orderDate: '2023-06-05', pickDate: '2023-06-05', total: '200', payMethod: '信用卡', status: '已確認' },
-  { merchantTradeNo: '018', cstmNum: 'A019', orderDate: '2023-06-06', pickDate: '2023-06-06', total: '1000', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '019', cstmNum: 'A020', orderDate: '2023-06-07', pickDate: '2023-06-07', total: '550', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '020', cstmNum: 'A021', orderDate: '2023-06-08', pickDate: '2023-06-08', total: '300', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '021', cstmNum: 'A022', orderDate: '2023-06-09', pickDate: '2023-06-09', total: '400', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '022', cstmNum: 'A023', orderDate: '2023-06-10', pickDate: '2023-06-10', total: '650', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '023', cstmNum: 'A024', orderDate: '2023-06-11', pickDate: '2023-06-11', total: '800', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '024', cstmNum: 'A025', orderDate: '2023-06-12', pickDate: '2023-06-12', total: '300', payMethod: '信用卡', status: '待確認' },
-  { merchantTradeNo: '025', cstmNum: 'A026', orderDate: '2023-06-13', pickDate: '2023-06-13', total: '750', payMethod: '現金', status: '已確認' },
-  { merchantTradeNo: '026', cstmNum: 'A027', orderDate: '2023-06-14', pickDate: '2023-06-14', total: '900', payMethod: '現金', status: '待確認' },
-]);
+const orders = computed(() => orderStore.getOrders);
+// // 修改模擬數據
+// const orders = ref([
+//   { merchantTradeNo: '001', cstmNum: 'A001', orderDate: '2023-05-20', pickDate: '2023-05-20', total: '800', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '002', cstmNum: 'A005', orderDate: '2023-05-21', pickDate: '2023-05-21', total: '300', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '003', cstmNum: 'A010', orderDate: '2023-05-22', pickDate: '2023-05-22', total: '450', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '004', cstmNum: 'A003', orderDate: '2023-05-23', pickDate: '2023-05-23', total: '600', payMethod: '信用卡', status: '已確認' },
+//   { merchantTradeNo: '005', cstmNum: 'A007', orderDate: '2023-05-24', pickDate: '2023-05-24', total: '700', payMethod: '現金', status: '待確認' },
+//   { merchantTradeNo: '006', cstmNum: 'A002', orderDate: '2023-05-25', pickDate: '2023-05-25', total: '900', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '007', cstmNum: 'A008', orderDate: '2023-05-26', pickDate: '2023-05-26', total: '350', payMethod: '信用卡', status: '已確認' },
+//   { merchantTradeNo: '008', cstmNum: 'A004', orderDate: '2023-05-27', pickDate: '2023-05-27', total: '400', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '009', cstmNum: 'A009', orderDate: '2023-05-28', pickDate: '2023-05-28', total: '200', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '010', cstmNum: 'A011', orderDate: '2023-05-29', pickDate: '2023-05-29', total: '1000', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '011', cstmNum: 'A012', orderDate: '2023-05-30', pickDate: '2023-05-30', total: '500', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '012', cstmNum: 'A013', orderDate: '2023-05-31', pickDate: '2023-05-31', total: '300', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '013', cstmNum: 'A014', orderDate: '2023-06-01', pickDate: '2023-06-01', total: '450', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '014', cstmNum: 'A015', orderDate: '2023-06-02', pickDate: '2023-06-02', total: '600', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '015', cstmNum: 'A016', orderDate: '2023-06-03', pickDate: '2023-06-03', total: '750', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '016', cstmNum: 'A017', orderDate: '2023-06-04', pickDate: '2023-06-04', total: '900', payMethod: '現金', status: '待確認' },
+//   { merchantTradeNo: '017', cstmNum: 'A018', orderDate: '2023-06-05', pickDate: '2023-06-05', total: '200', payMethod: '信用卡', status: '已確認' },
+//   { merchantTradeNo: '018', cstmNum: 'A019', orderDate: '2023-06-06', pickDate: '2023-06-06', total: '1000', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '019', cstmNum: 'A020', orderDate: '2023-06-07', pickDate: '2023-06-07', total: '550', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '020', cstmNum: 'A021', orderDate: '2023-06-08', pickDate: '2023-06-08', total: '300', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '021', cstmNum: 'A022', orderDate: '2023-06-09', pickDate: '2023-06-09', total: '400', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '022', cstmNum: 'A023', orderDate: '2023-06-10', pickDate: '2023-06-10', total: '650', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '023', cstmNum: 'A024', orderDate: '2023-06-11', pickDate: '2023-06-11', total: '800', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '024', cstmNum: 'A025', orderDate: '2023-06-12', pickDate: '2023-06-12', total: '300', payMethod: '信用卡', status: '待確認' },
+//   { merchantTradeNo: '025', cstmNum: 'A026', orderDate: '2023-06-13', pickDate: '2023-06-13', total: '750', payMethod: '現金', status: '已確認' },
+//   { merchantTradeNo: '026', cstmNum: 'A027', orderDate: '2023-06-14', pickDate: '2023-06-14', total: '900', payMethod: '現金', status: '待確認' },
+// ]);
 
 
 // 根據狀態篩選訂單
